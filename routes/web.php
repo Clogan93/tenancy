@@ -15,6 +15,7 @@ Route::resource('/', 'WelcomeController');
 Route::get('/signout', 'WelcomeController@signout');
 
 Route::resource('admin', 'AdminController');
+Route::resource('tenant', 'TenantController');
 
 Route::get('login', 'LoginController@index');
 Route::post('login', 'LoginController@signin');

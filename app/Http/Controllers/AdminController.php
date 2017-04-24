@@ -28,7 +28,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new user.
      *
      * @return \Illuminate\Http\Response
      */
@@ -38,7 +38,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created user in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -62,7 +62,7 @@ class AdminController extends Controller
     }
 
     /**
-    * Display the specified resource.
+    * Display the specified user.
     *
     * @param  int  $id
     * @return Response
@@ -73,7 +73,7 @@ class AdminController extends Controller
     }
 
     /**
-    * Show the form for editing the specified resource.
+    * Show the form for editing the specified user.
     *
     * @param  int  $id
     * @return Response
@@ -86,7 +86,7 @@ class AdminController extends Controller
     }
 
     /**
-    * Update the specified resource in storage.
+    * Update the specified user in storage.
     *
     * @param  int  $id
     * @return Response
@@ -110,7 +110,7 @@ class AdminController extends Controller
     }
 
     /**
-   * Remove the specified resource from storage.
+   * Remove the specified user from storage.
    *
    * @param  int  $id
    * @return Response

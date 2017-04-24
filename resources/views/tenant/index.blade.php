@@ -21,7 +21,7 @@
         <!-- Left col -->
         <div class="col-md-12">
 
-          <!-- TABLE: List of Users-->
+          <!-- TABLE: List of tenants -->
           <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">Users</h3>
@@ -39,46 +39,31 @@
                   <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Username</th>
-                    <th>Full Name</th>
-                    <th>User Type</th>
-                    <th>Status</th>
+                    <th>Tenant Name</th>
+                    <th>Provision Type</th>
+                    <th>Domain</th>
+                    <th>Manager Name</th>
                     <th></th>
                   </tr>
                   </thead>
                   <tbody>
-                  @foreach($users as $user)
+                  @foreach($tenants as $tenant)
                     <tr>
-                      <td>{{$user->id}}</td>
-                      <td>{{$user->username}}</td>
-                      <td>{{$user->fullname}}</td>
-                      <td>
-                        @if($user->admin == 1)
-                          <span class="label label-success">Administrator</span>
-                        @elseif($user->admin == 0)
-                          <span class="label label-primary">Tenant Manager</span>
-                        @endif
-                      </td>
-                      <td>
-                        @if($user->deleted == 1)
-                          <span class="label label-success">Deleted</span>
-                        @elseif($user->deleted == 0)
-                          <span class="label label-primary">Published</span>
-                        @endif
-                      </td>
+                      <td>{{$tenant->id}}</td>
+                      <td>{{$tenant->tenantname}}</td>
+                      <td>{{$tenant->domaintype}}</td>
+                      <td>{{$tenant->domain}}</td>
+                      <td>{{$tenant->manager}}</td>
                       <td>
                         <div style = "float:left">
-                          <a href="{{action('AdminController@edit', [$user->id])}}" class = "btn btn-primary btn-xs">Edit</a>
+                          <a href="{{action('TenantController@edit', [$tenant->id])}}" class = "btn btn-primary btn-xs">Edit</a>
                         </div>
-                        @if($user->deleted !== 1 && $user->admin !== 1)
-                          <div style = "float:left; margin-left:20px">
-                            {{ Form::open([ 'method'  => 'delete', 'route' => [ 'admin.destroy', $user->id ] ])
-     }}
-                                {{ Form::hidden('user', $user->id) }}
-                                {{ Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) }}
-                            {{ Form::close() }}
-                          </div>
-                        @endif
+                        <div style = "float:left; margin-left:20px">
+                          {{ Form::open([ 'method'  => 'delete', 'route' => [ 'tenant.destroy', $tenant->id ] ]) }}
+                              {{ Form::hidden('tenant', $tenant->id) }}
+                              {{ Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) }}
+                          {{ Form::close() }}
+                        </div>
                       </td>
                     </tr>
                   @endforeach
@@ -89,7 +74,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
-              <a href="{{action('AdminController@create')}}" class="btn btn-sm btn-info btn-flat pull-right">Create New User</a>
+              <a href="{{action('TenantController@create')}}" class="btn btn-sm btn-info btn-flat pull-right">Create New Tenant</a>
             </div>
             <!-- /.box-footer -->
           </div>
