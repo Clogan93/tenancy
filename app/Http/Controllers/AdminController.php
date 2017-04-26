@@ -17,7 +17,7 @@ class AdminController extends Controller
     {
         $users = User::all();
 
-        //get user info
+        //get logged in user info
         $loginuser = DB::table('users')
                 ->where('login',1)
                 ->get();
@@ -34,7 +34,12 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admin.create')->with('page_title', "Create New User");
+        //get logged in user info
+        $loginuser = DB::table('users')
+                ->where('login',1)
+                ->get();
+
+        return view('admin.create', compact('loginuser'))->with('page_title', "Create New User");
     }
 
     /**
@@ -82,7 +87,12 @@ class AdminController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return view('admin.edit', compact('user'));
+         //get logged in user info
+        $loginuser = DB::table('users')
+                ->where('login',1)
+                ->get();
+
+        return view('admin.edit', compact('user', 'loginuser'));
     }
 
     /**

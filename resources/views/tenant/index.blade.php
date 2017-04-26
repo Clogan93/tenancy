@@ -24,7 +24,7 @@
           <!-- TABLE: List of tenants -->
           <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Users</h3>
+              <h3 class="box-title">Tenants</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -47,26 +47,32 @@
                   </tr>
                   </thead>
                   <tbody>
-                  @foreach($tenants as $tenant)
+                  @if(sizeof($tenants) <= 0)
                     <tr>
-                      <td>{{$tenant->id}}</td>
-                      <td>{{$tenant->tenantname}}</td>
-                      <td>{{$tenant->domaintype}}</td>
-                      <td>{{$tenant->domain}}</td>
-                      <td>{{$tenant->manager}}</td>
-                      <td>
-                        <div style = "float:left">
-                          <a href="{{action('TenantController@edit', [$tenant->id])}}" class = "btn btn-primary btn-xs">Edit</a>
-                        </div>
-                        <div style = "float:left; margin-left:20px">
-                          {{ Form::open([ 'method'  => 'delete', 'route' => [ 'tenant.destroy', $tenant->id ] ]) }}
-                              {{ Form::hidden('tenant', $tenant->id) }}
-                              {{ Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) }}
-                          {{ Form::close() }}
-                        </div>
-                      </td>
+                      <td colspan = "6" align="center"><h3>There are no tenants</h3></td>
                     </tr>
-                  @endforeach
+                  @else
+                    @foreach($tenants as $tenant)
+                      <tr>
+                        <td>{{$tenant->id}}</td>
+                        <td>{{$tenant->tenantname}}</td>
+                        <td>{{$tenant->domaintype}}</td>
+                        <td>{{$tenant->domain}}</td>
+                        <td>{{$tenant->username}}</td>
+                        <td>
+                          <div style = "float:left">
+                            <a href="{{action('TenantController@edit', [$tenant->id])}}" class = "btn btn-primary btn-xs">Edit</a>
+                          </div>
+                          <div style = "float:left; margin-left:20px">
+                            {{ Form::open([ 'method'  => 'delete', 'route' => [ 'tenant.destroy', $tenant->id ] ]) }}
+                                {{ Form::hidden('tenant', $tenant->id) }}
+                                {{ Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) }}
+                            {{ Form::close() }}
+                          </div>
+                        </td>
+                      </tr>
+                    @endforeach
+                  @endif
                   </tbody>
                 </table>
               </div>

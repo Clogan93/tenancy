@@ -17,3 +17,12 @@
  .alert-sm{
  	color:#f00;
  }
+ .box-form-body{
+ 	margin:0 50px;
+ }
+ .slider-image:first-child{
+ 	margin-top:0;
+ }
+ .slider-image{
+ 	margin-top:10px;
+ }

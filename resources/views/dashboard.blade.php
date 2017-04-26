@@ -6,6 +6,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html>
   <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $page_title or "AdminLTE Dashboard" }}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.2 -->
@@ -34,6 +35,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
           apply the skin class to the body tag so the changes take effect.
     -->
     <link href="{{ asset('/bower_components/AdminLTE/dist/css/skins/skin-blue.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="{{ asset('/bower_components/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}"  rel="stylesheet" type="text/css">
+    <!-- Site Main Style -->
+    <link href="{{ asset('/css/style.css')}}" rel="stylesheet" type="text/css" />
+
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -61,13 +68,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="{{ asset('/bower_components/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
     <!-- ChartJS 1.0.1 -->
     <script src="{{ asset('/bower_components/AdminLTE/plugins/chartjs/Chart.min.js') }}" type="text/javascript"></script>
-    <!-- Site Main Style -->
-    <link href="{{ asset('/css/style.css')}}" rel="stylesheet" type="text/css" />
-
 
     <!-- Optionally, you can add Slimscroll and FastClick plugins. 
           Both of these plugins are recommended to enhance the 
           user experience -->
+
+    @yield('css')
   </head>
   <body class="skin-blue">
     <div class="wrapper">

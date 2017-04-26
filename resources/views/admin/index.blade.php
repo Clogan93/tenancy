@@ -47,41 +47,47 @@
                   </tr>
                   </thead>
                   <tbody>
-                  @foreach($users as $user)
+                  @if(sizeof($users) <= 0)
                     <tr>
-                      <td>{{$user->id}}</td>
-                      <td>{{$user->username}}</td>
-                      <td>{{$user->fullname}}</td>
-                      <td>
-                        @if($user->admin == 1)
-                          <span class="label label-success">Administrator</span>
-                        @elseif($user->admin == 0)
-                          <span class="label label-primary">Tenant Manager</span>
-                        @endif
-                      </td>
-                      <td>
-                        @if($user->deleted == 1)
-                          <span class="label label-success">Deleted</span>
-                        @elseif($user->deleted == 0)
-                          <span class="label label-primary">Published</span>
-                        @endif
-                      </td>
-                      <td>
-                        <div style = "float:left">
-                          <a href="{{action('AdminController@edit', [$user->id])}}" class = "btn btn-primary btn-xs">Edit</a>
-                        </div>
-                        @if($user->deleted !== 1 && $user->admin !== 1)
-                          <div style = "float:left; margin-left:20px">
-                            {{ Form::open([ 'method'  => 'delete', 'route' => [ 'admin.destroy', $user->id ] ])
-     }}
-                                {{ Form::hidden('user', $user->id) }}
-                                {{ Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) }}
-                            {{ Form::close() }}
-                          </div>
-                        @endif
-                      </td>
+                      <td colspan = "6" align="center"><h3>There are no users</h3></td>
                     </tr>
-                  @endforeach
+                  @else
+                    @foreach($users as $user)
+                      <tr>
+                        <td>{{$user->id}}</td>
+                        <td>{{$user->username}}</td>
+                        <td>{{$user->fullname}}</td>
+                        <td>
+                          @if($user->admin == 1)
+                            <span class="label label-success">Administrator</span>
+                          @elseif($user->admin == 0)
+                            <span class="label label-primary">Tenant Manager</span>
+                          @endif
+                        </td>
+                        <td>
+                          @if($user->deleted == 1)
+                            <span class="label label-success">Deleted</span>
+                          @elseif($user->deleted == 0)
+                            <span class="label label-primary">Published</span>
+                          @endif
+                        </td>
+                        <td>
+                          <div style = "float:left">
+                            <a href="{{action('AdminController@edit', [$user->id])}}" class = "btn btn-primary btn-xs">Edit</a>
+                          </div>
+                          @if($user->deleted !== 1 && $user->admin !== 1)
+                            <div style = "float:left; margin-left:20px">
+                              {{ Form::open([ 'method'  => 'delete', 'route' => [ 'admin.destroy', $user->id ] ])
+       }}
+                                  {{ Form::hidden('user', $user->id) }}
+                                  {{ Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) }}
+                              {{ Form::close() }}
+                            </div>
+                          @endif
+                        </td>
+                      </tr>
+                    @endforeach
+                  @endif
                   </tbody>
                 </table>
               </div>
